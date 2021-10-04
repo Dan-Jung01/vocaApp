@@ -5,19 +5,7 @@ import { Link } from "react-router-dom";
 const Home = ({ userObj }) => {
   const [days, setDays] = useState([]);
 
-  //   const getDays = async () => {
-  //     const dbDays = await dbService.collection("days").get();
-  //     dbDays.forEach((doc) => {
-  //       const dayObject = {
-  //         ...doc.data(),
-  //         id: doc.id,
-  //       };
-  //       setDays((prev) => [dayObject, ...prev]);
-  //     });
-  //   };
-
   useEffect(() => {
-    // getDays();
     dbService.collection("days").onSnapshot((snapshot) => {
       const dayArray = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -35,16 +23,18 @@ const Home = ({ userObj }) => {
     });
   };
 
-  // console.log(days.day);
+  console.log(userObj.displayName);
 
   return (
     <ul className='list_day'>
       Home
-      {days.map((day) => (
-        <li className='each_day' key={day.id}>
-          <Link to={`/day/${day.day}`}>Day {day.day}</Link>
-        </li>
-      ))}
+      {days.map((day) =>
+        day.creatorId === userObj.uid ? (
+          <li className='each_day' key={day.id}>
+            <Link to={`/day/${day.day}`}>Day {day.day}</Link>
+          </li>
+        ) : null
+      )}
       <button onClick={onClick} name='addDay'>
         Add Day
       </button>
