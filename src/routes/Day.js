@@ -1,26 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import { dbService } from "fbase";
 import { Link } from "react-router-dom";
 import Word from "components/Word";
 
-const Day = ({ userObj }) => {
-  const [days, setDays] = useState([]);
+const Day = () => {
   const [words, setWords] = useState([]);
-  const history = useHistory();
   const { day } = useParams();
-  //   console.log(day);
-  //   console.log(words.length);
 
   useEffect(() => {
-    // dbService.collection("days").onSnapshot((snapshot) => {
-    //   const dayArray = snapshot.docs.map((doc) => ({
-    //     id: doc.id,
-    //     ...doc.data(),
-    //   }));
-    //   setDays(dayArray);
-    // });
-    dbService.collection("words").onSnapshot((snapshot) => {
+    dbService.collection(`words`).onSnapshot((snapshot) => {
       // Add doc.id with doc.data
       const wordArray = snapshot.docs.map((doc) => ({
         id: doc.id,
