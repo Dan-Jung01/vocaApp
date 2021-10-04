@@ -1,28 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { dbService } from "fbase";
 
 const CreateWord = () => {
   const history = useHistory();
-  const [days, setDays] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { day } = useParams();
 
-  console.log(day);
-
   const engRef = useRef(null);
   const korRef = useRef(null);
-
-  useEffect(() => {
-    // getDays();
-    dbService.collection("days").onSnapshot((snapshot) => {
-      const dayArray = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setDays(dayArray);
-    });
-  }, []);
 
   // Add a word if user click button
   async function onSubmit(e) {
@@ -68,16 +54,6 @@ const CreateWord = () => {
         <label>Kor</label>
         <input type='text' placeholder='뜻을 입력해주세요' ref={korRef} />
       </div>
-      {/* <div className='input_area'>
-        <label>Day</label>
-        <select ref={dayRef}>
-          {days.map((day) => (
-            <option key={day.id} value={day.day}>
-              {day.day}
-            </option>
-          ))}
-        </select>
-      </div> */}
       <button
         style={{
           opacity: isLoading ? 0.3 : 1,
