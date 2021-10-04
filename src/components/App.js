@@ -27,7 +27,7 @@ function App() {
       ) : (
         "Initializing..."
       )}
-      <footer>&copy; {new Date().getFullYear()} VocaApp</footer>
+      {/* <footer>&copy; {new Date().getFullYear()} VocaApp</footer> */}
     </>
   );
 }
