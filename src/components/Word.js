@@ -3,8 +3,7 @@ import React, { useRef, useState } from "react";
 import Modal from "./Modal";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 
-const Word = ({ word }) => {
-  // const [word, setWord] = useState(w);
+const Word = ({ word, userObj }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDone, setIsDone] = useState(word.isDone);
   const [isEngShow, setEngShow] = useState(word.isEngShow);
@@ -15,21 +14,21 @@ const Word = ({ word }) => {
   const korRef = useRef(null);
 
   async function KorToggleShow() {
-    await dbService.doc(`words/${word.id}`).update({
+    await dbService.doc(`users/${userObj.uid}/words/${word.id}`).update({
       isKorShow: !isKorShow,
     });
     setKorShow(!isKorShow);
   }
 
   async function EngToggleShow() {
-    await dbService.doc(`words/${word.id}`).update({
+    await dbService.doc(`users/${userObj.uid}/words/${word.id}`).update({
       isEngShow: !isEngShow,
     });
     setEngShow(!isEngShow);
   }
 
   async function toggleDone() {
-    await dbService.doc(`words/${word.id}`).update({
+    await dbService.doc(`users/${userObj.uid}/words/${word.id}`).update({
       isDone: !isDone,
     });
     setIsDone(!isDone);
@@ -38,7 +37,7 @@ const Word = ({ word }) => {
   const onDelecteClick = async () => {
     const ok = window.confirm("이 단어를 삭제하시겠습니까?");
     if (ok) {
-      await dbService.doc(`words/${word.id}`).delete();
+      await dbService.doc(`users/${userObj.uid}/words/${word.id}`).delete();
     }
   };
 
@@ -55,7 +54,6 @@ const Word = ({ word }) => {
       const inputEng = engRef.current.value;
       const inputKor = korRef.current.value;
 
-      console.log("asdf");
       if (inputEng === "" && inputKor === "") {
         alert("모든 칸을 채워주세요");
       } else if (inputEng === "") {
@@ -64,7 +62,7 @@ const Word = ({ word }) => {
         alert("뜻이 비어있습니다");
       } else {
         setIsLoading(true);
-        await dbService.doc(`words/${word.id}`).update({
+        await dbService.doc(`users/${userObj.uid}/words/${word.id}`).update({
           eng: inputEng,
           kor: inputKor,
         });
@@ -120,16 +118,6 @@ const Word = ({ word }) => {
               defaultValue={word.kor}
             />
           </div>
-          {/* <div className='input_area'>
-            <label>Day</label>
-            <select ref={dayRef} defaultValue={word.day}>
-              {days.map((day) => (
-                <option key={day.id} value={day.day}>
-                  {day.day}
-                </option>
-              ))}
-            </select>
-          </div> */}
         </Modal>
       </td>
     </tr>
