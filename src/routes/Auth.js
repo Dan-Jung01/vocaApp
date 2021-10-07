@@ -22,7 +22,7 @@ const Auth = () => {
       <AuthForm />
       <div className='authBtns'>
         <button onClick={onSocialClick} name='google' className='authBtn'>
-          Continue with Google <FaGoogle className='icon' />
+          Continue with Google <FaGoogle size={15} />
         </button>
       </div>
     </div>
