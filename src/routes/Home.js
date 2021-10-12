@@ -2,7 +2,6 @@ import { dbService } from "fbase";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoAddCircleSharp } from "react-icons/io5";
-import Day from "es-abstract/5/Day";
 
 const Home = ({ userObj }) => {
   const [days, setDays] = useState([]);
