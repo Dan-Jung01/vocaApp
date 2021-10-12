@@ -11,58 +11,6 @@ const Day = ({ userObj }) => {
   const [days, setDays] = useState([]);
   const { day } = useParams();
   const history = useHistory();
-  const [isKorShow, setKorShow] = useState(Boolean);
-
-  console.log(isKorShow);
-
-  // async function allKorShow() {
-  //   await Promise.all(
-  //     words.map(async (word) => {
-  //       await dbService.doc(`users/${userObj.uid}/words/${word.id}`).update({
-  //         isKorShow: !isKorShow,
-  //       });
-  //       setKorShow(!isKorShow);
-  //     })
-  //   );
-
-  //   // words.map((word) => {
-  //   //   dbService.doc(`users/${userObj.uid}/words/${word.id}`).update({
-  //   //     isKorShow: !isKorShow,
-  //   //   });
-  //   //   setKorShow(!isKorShow);
-  //   // });
-  // }
-
-  // async function allKorShow() {
-  //   words.map(async (word) => {
-  //     dbService.doc(`users/${userObj.uid}/words/${word.id}`).update({
-  //       isKorShow: !isKorShow,
-  //     });
-  //   });
-  //   setKorShow(!isKorShow);
-  // }
-
-  const a = words.forEach((id) => console.log(id.id));
-
-  const allKorShow = async () => {
-    await Promise.all(
-      words.map((word) => {
-        dbService.doc(`users/${userObj.uid}/words/${word.id}`).update({
-          isKorShow: !isKorShow,
-        });
-      })
-    );
-    setKorShow(!isKorShow);
-  };
-
-  // async function allKorShow() {
-  //   await dbService
-  //     .doc(`users/${userObj.uid}/words/${words.map((word) => word.id)}`)
-  //     .update({
-  //       isKorShow: !isKorShow,
-  //     });
-  //   setKorShow(!isKorShow);
-  // }
 
   useEffect(() => {
     dbService
@@ -77,7 +25,7 @@ const Day = ({ userObj }) => {
         }));
         setWords(wordArray);
       });
-  }, [day, userObj.uid, isKorShow]);
+  }, [day, userObj.uid]);
 
   useEffect(() => {
     dbService
@@ -130,6 +78,16 @@ const Day = ({ userObj }) => {
       )}
       <table>
         <tbody>
+          {words.length !== 0 ? (
+            <tr className='dayTableInfo'>
+              <td>완료</td>
+              <td>영어</td>
+              <td>뜻</td>
+              <td>보이기 / 숨기기</td>
+              <td>삭제</td>
+              <td>수정</td>
+            </tr>
+          ) : null}
           {words.map((word) =>
             userObj.uid === word.creatorId ? (
               <Word word={word} key={word.id} userObj={userObj} />
