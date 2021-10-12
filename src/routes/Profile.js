@@ -36,9 +36,11 @@ const Profile = ({ userObj, refreshUser }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
     if (userObj.displayName !== newDisplayName) {
-      await userObj.updateProfile({
-        displayName: newDisplayName,
-      });
+      await userObj
+        .updateProfile({
+          displayName: newDisplayName,
+        })
+        .then(alert("이름이 변경되었습니다"));
       refreshUser();
     }
   };
@@ -74,7 +76,11 @@ const Profile = ({ userObj, refreshUser }) => {
           <label>{isDoneCount.length}개입니다</label>
         </div>
         <div className='profileEachInfo'>
-          <label>지금까지 {donePercentage}% 완료하셨습니다!</label>
+          {donePercentage ? (
+            <label>지금까지 {donePercentage}% 완료하셨습니다!</label>
+          ) : (
+            <label>지금까지 0% 완료하셨습니다!</label>
+          )}
         </div>
       </div>
     </div>
