@@ -7,7 +7,7 @@ import Home from "routes/Home";
 import Profile from "routes/Profile";
 import Navigation from "./Navigation";
 
-const AppRouter = ({ isLoggedIn, userObj }) => {
+const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
   return (
     <BrowserRouter>
       {isLoggedIn && <Navigation />}
@@ -22,7 +22,7 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
                 <Day userObj={userObj} />
               </Route>
               <Route exact path='/profile'>
-                <Profile />
+                <Profile userObj={userObj} refreshUser={refreshUser} />
               </Route>
               <Route path='/create_word/:day'>
                 <CreateWord userObj={userObj} />
