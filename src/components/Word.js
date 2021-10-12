@@ -37,7 +37,10 @@ const Word = ({ word, userObj }) => {
   const onDelecteClick = async () => {
     const ok = window.confirm("이 단어를 삭제하시겠습니까?");
     if (ok) {
-      await dbService.doc(`users/${userObj.uid}/words/${word.id}`).delete();
+      await dbService
+        .doc(`users/${userObj.uid}/words/${word.id}`)
+        .delete()
+        .then(alert("단어가 삭제되었습니다"));
     }
   };
 
