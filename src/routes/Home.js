@@ -39,7 +39,12 @@ const Home = ({ userObj }) => {
 
   return (
     <div className='homeContainer'>
-      <div className='homeTitle'> 안녕하세요 {userObj.displayName} 님 </div>
+      {userObj.displayName ? (
+        <div className='homeTitle'> 안녕하세요 {userObj.displayName} 님 </div>
+      ) : (
+        <div className='homeTitle'> 프로필에서 사용자 이름을 설정해주세요 </div>
+      )}
+      {/* <div className='homeTitle'> 안녕하세요 {userObj.displayName} 님 </div> */}
       <ul className='homeDayContainer'>
         {days.map(
           (day) => (
