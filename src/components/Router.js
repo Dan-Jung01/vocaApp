@@ -9,7 +9,7 @@ import Navigation from "./Navigation";
 
 const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       {isLoggedIn && <Navigation />}
       <div className='App'>
         <Switch>
