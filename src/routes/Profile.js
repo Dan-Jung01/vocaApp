@@ -77,7 +77,9 @@ const Profile = ({ userObj, refreshUser }) => {
         </div>
         <div className='profileEachInfo'>
           {donePercentage ? (
-            <label>지금까지 {donePercentage}% 완료하셨습니다!</label>
+            <label>
+              지금까지 {parseFloat(donePercentage).toFixed(2)}% 완료하셨습니다!
+            </label>
           ) : (
             <label>지금까지 0% 완료하셨습니다!</label>
           )}
