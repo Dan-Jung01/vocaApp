@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Published Link for Voca App
+https://dan-jung01.github.io/vocaApp/
+
 ## Available Scripts
 
 In the project directory, you can run:
